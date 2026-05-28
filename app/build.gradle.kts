@@ -32,5 +32,16 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.App"
+    mainClass = "net.charukak.sudoku.launcher"
+}
+
+tasks.register<org.gradle.jvm.tasks.Jar>("fatJar") {
+    archiveClassifier.set("all")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes["Main-Class"] = "net.charukak.sudoku.launcher.App"
+    }
+    from(sourceSets.main.get().output)
+    dependsOn(configurations.runtimeClasspath)
+    from({configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }})
 }
