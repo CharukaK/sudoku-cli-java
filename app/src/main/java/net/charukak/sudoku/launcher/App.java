@@ -3,12 +3,25 @@
  */
 package net.charukak.sudoku.launcher;
 
+import java.io.Console;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        try {
+
+            System.out.flush();
+            System.out.println(new App().getGreeting());
+            Thread.sleep(1000);
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.println(new App().getGreeting() + "charuka");
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.out.println("error occurred: " + e.getMessage());
+        }
     }
 }
