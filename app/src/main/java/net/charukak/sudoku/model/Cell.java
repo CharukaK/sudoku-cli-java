@@ -1,10 +1,13 @@
 package net.charukak.sudoku.model;
 
+import net.charukak.sudoku.utils.SudokuConstants;
+
 public class Cell implements PrintableElement {
     private int value;
-    private boolean isFixed;
+    private boolean isPreFilled;
 
-    public Cell(int value) {
+    public Cell(int value) throws SudokuError {
+        validateValue(value);
         this.value = value;
     }
 
@@ -17,18 +20,28 @@ public class Cell implements PrintableElement {
         return this.value;
     }
 
-    public void setIsFixed(boolean isFixed) {
-        this.isFixed = isFixed;
+    public void setPreFilled(boolean isPreFilled) {
+        this.isPreFilled = isPreFilled;
     }
 
-    public void setValue(int name) {
-        this.value = name;
-    }
-
-    public Object getIsFixed() throws SudokuError {
-        if (isFixed) {
-            throw new SudokuError("you cannot edit a fixed value string");
+    public void setValue(int value) throws SudokuError {
+        if (isPreFilled) {
+            throw new SudokuError("Cannot modify a pre-filled cell");
         }
-        return this.isFixed;
+
+        validateValue(value);
+        this.value = value;
+    }
+
+    public boolean isPreFilled() {
+        return this.isPreFilled;
+    }
+
+    private void validateValue(int value) throws SudokuError {
+        if (value < 0 || value > SudokuConstants.BOARD_LENGTH) {
+            throw new SudokuError(
+                    "Invalid number. Only accepts numbers from 0-"
+                            + SudokuConstants.BOARD_LENGTH);
+        }
     }
 }
