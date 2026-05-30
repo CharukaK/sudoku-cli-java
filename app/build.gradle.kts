@@ -18,6 +18,7 @@ repositories {
 dependencies {
     // Use JUnit test framework.
     testImplementation(libs.junit)
+    testRuntimeOnly(libs.junit.platform.launcher)
 
     // This dependency is used by the application.
     implementation(libs.guava)
@@ -33,6 +34,10 @@ java {
 application {
     // Define the main class for the application.
     mainClass = "net.charukak.sudoku.launcher"
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.register<org.gradle.jvm.tasks.Jar>("fatJar") {

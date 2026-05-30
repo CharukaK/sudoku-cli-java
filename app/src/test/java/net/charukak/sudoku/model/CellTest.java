@@ -1,13 +1,17 @@
 package net.charukak.sudoku.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
+@DisplayName("Cell")
 public class CellTest {
     @Test
-    public void testCellValue() throws SudokuError {
+    @DisplayName("returns the initialized value")
+    void testCellValue() throws SudokuError {
         int value = 3;
         Cell cell = new Cell(value);
 
@@ -15,7 +19,8 @@ public class CellTest {
     }
 
     @Test
-    public void testPrintableValue() throws SudokuError {
+    @DisplayName("formats non-zero value as digits")
+    void testPrintableValue() throws SudokuError {
         int value = 3;
         Cell cell = new Cell(value);
 
@@ -23,33 +28,46 @@ public class CellTest {
     }
 
     @Test
-    public void testPrintableValueForZero() throws SudokuError {
+    @DisplayName("formats zero value as dot")
+    void testPrintableValueForZero() throws SudokuError {
         Cell cell = new Cell(0);
         assertEquals(cell.getPrintableString(), ".");
     }
 
-    @Test(expected = SudokuError.class)
-    public void testPreFilledValueEditing() throws SudokuError {
+    @Test
+    @DisplayName("throws when editing a pre-filled cell")
+    void testPreFilledValueEditing() throws SudokuError {
         Cell cell = new Cell(1);
         cell.setPreFilled(true);
         assertTrue(cell.isPreFilled());
-        cell.setValue(5);
-    }
-
-    @Test(expected = SudokuError.class)
-    public void testSettingInvalidValue() throws SudokuError {
-        Cell cell = new Cell(1);
-        cell.setValue(12);
-    }
-
-    @Test(expected = SudokuError.class)
-    public void testSettingInvalidNegativeValue() throws SudokuError {
-        Cell cell = new Cell(1);
-        cell.setValue(-1);
+        assertThrows(SudokuError.class, () -> cell.setValue(5));
     }
 
     @Test
-    public void testSettingBoundaryValues() throws SudokuError {
+    @DisplayName("throws when setting value above range")
+    void testSettingInvalidValue() {
+        assertThrows(
+                SudokuError.class,
+                () -> {
+                    Cell cell = new Cell(1);
+                    cell.setValue(12);
+                });
+    }
+
+    @Test
+    @DisplayName("throws when setting negative value")
+    void testSettingInvalidNegativeValue() {
+        assertThrows(
+                SudokuError.class,
+                () -> {
+                    Cell cell = new Cell(1);
+                    cell.setValue(-1);
+                });
+    }
+
+    @Test
+    @DisplayName("accepts boundary values zero and nine")
+    void testSettingBoundaryValues() throws SudokuError {
         Cell cell = new Cell(1);
         cell.setValue(9);
         assertEquals(cell.getValue(), 9);
@@ -58,13 +76,15 @@ public class CellTest {
         assertEquals(cell.getValue(), 0);
     }
 
-    @Test(expected = SudokuError.class)
-    public void testConstructorRejectsInvalidHighValue() throws SudokuError {
-        new Cell(12);
+    @Test
+    @DisplayName("constructor rejects value above range")
+    void testConstructorRejectsInvalidHighValue() {
+        assertThrows(SudokuError.class, () -> new Cell(12));
     }
 
-    @Test(expected = SudokuError.class)
-    public void testConstructorRejectsInvalidNegativeValue() throws SudokuError {
-        new Cell(-1);
+    @Test
+    @DisplayName("constructor rejects negative value")
+    void testConstructorRejectsInvalidNegativeValue() {
+        assertThrows(SudokuError.class, () -> new Cell(-1));
     }
 }
