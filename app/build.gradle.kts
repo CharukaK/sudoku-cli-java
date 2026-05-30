@@ -33,7 +33,13 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "net.charukak.sudoku.launcher"
+    mainClass = "net.charukak.sudoku.launcher.App"
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "net.charukak.sudoku.launcher.App"
+    }
 }
 
 tasks.test {

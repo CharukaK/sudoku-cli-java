@@ -12,8 +12,41 @@ public class Board implements PrintableElement {
 
     @Override
     public String getPrintableString() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrintableString'");
+        StringBuilder builder = new StringBuilder();
+        int rowStarter = 'A';
+        int colStarter = 1;
+        String suffix = "   ";
+        String rowSuffix = "  ";
+        String colSeperator = " │ ";
+
+        for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
+            if (row == 0) {
+                builder.append(suffix);
+                for (int i = 0; i < board.length; i++) {
+                    builder.append(colStarter + i);
+                    builder.append(suffix);
+                }
+                builder.append("\n");
+                builder.append("\n");
+            }
+            builder.append(Character.toString(rowStarter + row));
+            builder.append(rowSuffix);
+            for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
+                builder.append(board[row][col].getPrintableString());
+                if ((colStarter + col) % 3 == 0 && (colStarter + col) < SudokuConstants.BOARD_LENGTH) {
+                    builder.append(colSeperator);
+                } else {
+                    builder.append(suffix);
+                }
+            }
+            builder.append("\n");
+            if ((row + 1) % 3 == 0 && row < SudokuConstants.BOARD_LENGTH) {
+                builder.append("  ───────────┼───────────┼───────────  ");
+                builder.append("\n");
+            }
+        }
+
+        return builder.toString();
     }
 
     public int getValue(int row, int col) throws SudokuError {
