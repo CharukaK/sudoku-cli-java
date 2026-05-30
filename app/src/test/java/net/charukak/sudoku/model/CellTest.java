@@ -31,7 +31,7 @@ public class CellTest {
     @DisplayName("formats zero value as dot")
     void testPrintableValueForZero() throws SudokuError {
         Cell cell = new Cell(0);
-        assertEquals(cell.getPrintableString(), ".");
+        assertEquals(cell.getPrintableString(), "_");
     }
 
     @Test

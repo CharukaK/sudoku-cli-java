@@ -13,7 +13,7 @@ public class Cell implements PrintableElement {
 
     @Override
     public String getPrintableString() {
-        return this.value == 0 ? "." : "" + this.value;
+        return this.value == 0 ? "_" : "" + this.value;
     }
 
     public int getValue() {

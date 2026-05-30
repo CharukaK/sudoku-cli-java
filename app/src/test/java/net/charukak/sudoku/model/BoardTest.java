@@ -75,4 +75,15 @@ public class BoardTest {
         assertEquals(3, board.getValue(9, 9));
     }
 
+    // @Test
+    // @DisplayName("Validate Board printed to the console")
+    // void testPrintableString() {
+    //     Board board = new Board();
+    //     String output = board.getPrintableString();
+    //     String[] rows = output.split("\n");
+    //
+    //     assertEquals("  123 456 789", rows[0]);
+    //     assertEquals("A 123 456 789", rows[0]);
+    // }
+
 }
