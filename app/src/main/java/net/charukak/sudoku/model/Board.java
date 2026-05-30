@@ -13,34 +13,29 @@ public class Board implements PrintableElement {
     @Override
     public String getPrintableString() {
         StringBuilder builder = new StringBuilder();
-        int rowStarter = 'A';
-        int colStarter = 1;
+        int boardLength = SudokuConstants.BOARD_LENGTH;
         String suffix = "   ";
         String rowSuffix = "  ";
         String colSeperator = " │ ";
 
-        for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
-            if (row == 0) {
-                builder.append(suffix);
-                for (int i = 0; i < board.length; i++) {
-                    builder.append(colStarter + i);
-                    builder.append(suffix);
-                }
-                builder.append("\n");
-                builder.append("\n");
-            }
-            builder.append(Character.toString(rowStarter + row));
-            builder.append(rowSuffix);
-            for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
+        builder.append(suffix);
+        for (int col = 1; col <= boardLength; col++) {
+            builder.append(col).append(suffix);
+        }
+        builder.append("\n\n");
+
+        for (int row = 0; row < boardLength; row++) {
+            builder.append((char) ('A' + row)).append(rowSuffix);
+            for (int col = 0; col < boardLength; col++) {
                 builder.append(board[row][col].getPrintableString());
-                if ((colStarter + col) % 3 == 0 && (colStarter + col) < SudokuConstants.BOARD_LENGTH) {
+                if ((col + 1) % 3 == 0 && col < boardLength - 1) {
                     builder.append(colSeperator);
                 } else {
                     builder.append(suffix);
                 }
             }
             builder.append("\n");
-            if ((row + 1) % 3 == 0 && row < SudokuConstants.BOARD_LENGTH) {
+            if ((row + 1) % 3 == 0 && row < boardLength - 1) {
                 builder.append("  ───────────┼───────────┼───────────  ");
                 builder.append("\n");
             }
