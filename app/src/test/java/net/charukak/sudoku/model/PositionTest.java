@@ -26,14 +26,14 @@ public class PositionTest {
 
     static Stream<Arguments> validReferenceProvider() {
         return Stream.of(
-                Arguments.of("a1", 1, 1),
-                Arguments.of("a9", 1, 9),
-                Arguments.of("i1", 9, 1),
-                Arguments.of("i9", 9, 9),
-                Arguments.of("c5", 3, 5),
-                Arguments.of("e8", 5, 8),
-                Arguments.of("b2", 2, 2),
-                Arguments.of("h7", 8, 7));
+                Arguments.of("a1", 0, 0),
+                Arguments.of("a9", 0, 8),
+                Arguments.of("i1", 8, 0),
+                Arguments.of("i9", 8, 8),
+                Arguments.of("c5", 2, 4),
+                Arguments.of("e8", 4, 7),
+                Arguments.of("b2", 1, 1),
+                Arguments.of("h7", 7, 6));
     }
 
     @Test

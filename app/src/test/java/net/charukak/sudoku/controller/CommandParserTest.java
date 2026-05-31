@@ -64,9 +64,9 @@ public class CommandParserTest {
 
     static Stream<Arguments> validSetProvider() {
         return Stream.of(
-                Arguments.of("a1 5", 1, 1, 5),
-                Arguments.of("c3 9", 3, 3, 9),
-                Arguments.of("h8 1", 8, 8, 1));
+                Arguments.of("a1 5", 0, 0, 5),
+                Arguments.of("c3 9", 2, 2, 9),
+                Arguments.of("h8 1", 7, 7, 1));
     }
 
     @ParameterizedTest
@@ -81,9 +81,9 @@ public class CommandParserTest {
 
     static Stream<Arguments> validClearProvider() {
         return Stream.of(
-                Arguments.of("a1 clear", 1, 1),
-                Arguments.of("d5 clear", 4, 5),
-                Arguments.of("i9 clear", 9, 9));
+                Arguments.of("a1 clear", 0, 0),
+                Arguments.of("d5 clear", 3, 4),
+                Arguments.of("i9 clear", 8, 8));
     }
 
     @ParameterizedTest

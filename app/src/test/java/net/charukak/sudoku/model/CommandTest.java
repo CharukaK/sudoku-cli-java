@@ -12,7 +12,7 @@ public class CommandTest {
     @Test
     @DisplayName("set returns SET_VALUE with position and value")
     void testSet() {
-        Position p = new Position(3, 5);
+        Position p = new Position(2, 4);
         Command cmd = Command.set(p, 7);
         assertEquals(Command.Type.SET_VALUE, cmd.getType());
         assertEquals(p, cmd.getPosition());
@@ -23,7 +23,7 @@ public class CommandTest {
     @Test
     @DisplayName("clear returns CLEAR_VALUE with position")
     void testClear() {
-        Position p = new Position(1, 9);
+        Position p = new Position(0, 8);
         Command cmd = Command.clear(p);
         assertEquals(Command.Type.CLEAR_VALUE, cmd.getType());
         assertEquals(p, cmd.getPosition());

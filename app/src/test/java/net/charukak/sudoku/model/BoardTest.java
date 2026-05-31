@@ -21,9 +21,8 @@ public class BoardTest {
     void testCreatingAValidBoard() throws SudokuError {
         Board board = new Board();
 
-        // implementation is 1 index
-        for (int row = 1; row <= SudokuConstants.BOARD_LENGTH; row++) {
-            for (int col = 1; col <= SudokuConstants.BOARD_LENGTH; col++) {
+        for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
+            for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
                 assertEquals(0, board.getValue(row, col));
             }
         }
@@ -33,8 +32,8 @@ public class BoardTest {
     @DisplayName("Set/Get value methods are working properly")
     void testValueSetterAndGetter() throws SudokuError {
         Board board = new Board();
-        board.setValue(3, 3, 7);
-        assertEquals(7, board.getValue(3, 3));
+        board.setValue(2, 2, 7);
+        assertEquals(7, board.getValue(2, 2));
     }
 
     @ParameterizedTest
@@ -57,8 +56,8 @@ public class BoardTest {
         return Stream.of(
                 Arguments.of(0, 12),
                 Arguments.of(-12, 0),
-                Arguments.of(0, 1),
-                Arguments.of(1, 0),
+                Arguments.of(0, 9),
+                Arguments.of(9, 0),
                 Arguments.of(10, 1),
                 Arguments.of(1, 10),
                 Arguments.of(-1, 1),
@@ -69,10 +68,10 @@ public class BoardTest {
     @DisplayName("Set/Get at boundary positions")
     void testBoundaryPositions() throws SudokuError {
         Board board = new Board();
-        board.setValue(1, 1, 5);
-        assertEquals(5, board.getValue(1, 1));
-        board.setValue(9, 9, 3);
-        assertEquals(3, board.getValue(9, 9));
+        board.setValue(0, 0, 5);
+        assertEquals(5, board.getValue(0, 0));
+        board.setValue(8, 8, 3);
+        assertEquals(3, board.getValue(8, 8));
     }
 
     @Test

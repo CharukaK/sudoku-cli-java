@@ -46,12 +46,12 @@ public class Board implements PrintableElement {
 
     public int getValue(int row, int col) throws SudokuError {
         validatePosition(row, col);
-        return this.board[row - 1][col - 1].getValue();
+        return this.board[row][col].getValue();
     }
 
     public void setValue(int row, int col, int value) throws SudokuError {
         validatePosition(row, col);
-        this.board[row - 1][col - 1].setValue(value);
+        this.board[row][col].setValue(value);
     }
 
     private void initializeBoard() {
@@ -68,12 +68,12 @@ public class Board implements PrintableElement {
 
     public Cell getCell(int row, int col) throws SudokuError {
         validatePosition(row, col);
-        return this.board[row - 1][col - 1];
+        return this.board[row][col];
     }
 
     private void validatePosition(int row, int col) throws SudokuError {
-        if (row < 1 || row > SudokuConstants.BOARD_LENGTH
-                || col < 1 || col > SudokuConstants.BOARD_LENGTH) {
+        if (row < 0 || row >= SudokuConstants.BOARD_LENGTH
+                || col < 0 || col >= SudokuConstants.BOARD_LENGTH) {
             throw new SudokuError("Invalid board position: (" + row + "," + col + ")");
         }
     }
