@@ -16,6 +16,7 @@ public class GameLoop {
         CommandParser parser = new CommandParser();
         PuzzleProvider provider = new StaticPuzzleProvider();
         SudokuGame sudokuGame = new SudokuGame(provider.getPuzzleBoard(), provider.getSolutionBoard());
+        String message = null;
 
         while (true) {
             System.out.print("\033[H\033[2J");
@@ -25,18 +26,19 @@ public class GameLoop {
                 showGreeting = false;
             }
             System.out.println(sudokuGame.getBoardString());
+            if (message != null ) {
+                System.out.println("\n" + message);
+            }
 
             System.out.print("\nEnter command (e.g., A3 4, C5 clear, hint, check): ");
             String cmdStr = scanner.nextLine();
             Command cmd = parser.parse(cmdStr.toLowerCase());
             CommandResult result = sudokuGame.apply(cmd);
-
-            if (result.getMessage() != null && !result.getMessage().isBlank()) {
-                System.out.println("\n" + result.getMessage());
-            }
+            message = result.getMessage();
 
             if (result.getStatus() == CommandResult.Status.QUIT
                     || result.getStatus() == CommandResult.Status.GAME_WON) {
+                System.out.println("\n" + result.getMessage());
                 break;
             }
         }

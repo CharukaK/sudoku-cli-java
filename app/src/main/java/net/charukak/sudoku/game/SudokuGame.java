@@ -83,7 +83,11 @@ public class SudokuGame {
 
         int value = solutionBoard.getValue(hintPosition.row(), hintPosition.col());
 
-        return CommandResult.ok(String.format("Hint: Cell %s = %d", hintPosition.toString(), value));
+        return CommandResult.ok(
+                String.format(
+                        "Hint: Cell %s = %d",
+                        hintPosition.toString().toUpperCase(),
+                        value));
 
     }
 
