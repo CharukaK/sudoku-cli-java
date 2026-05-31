@@ -54,6 +54,11 @@ public class Board implements PrintableElement {
         this.board[row][col].setValue(value);
     }
 
+    public boolean isPreFilled(int row, int col) throws SudokuError {
+        validatePosition(row, col);
+        return this.board[row][col].isPreFilled();
+    }
+
     private void initializeBoard() {
         for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
             for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
