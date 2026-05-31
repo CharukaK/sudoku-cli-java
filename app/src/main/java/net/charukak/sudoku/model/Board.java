@@ -66,6 +66,11 @@ public class Board implements PrintableElement {
         }
     }
 
+    public Cell getCell(int row, int col) throws SudokuError {
+        validatePosition(row, col);
+        return this.board[row - 1][col - 1];
+    }
+
     private void validatePosition(int row, int col) throws SudokuError {
         if (row < 1 || row > SudokuConstants.BOARD_LENGTH
                 || col < 1 || col > SudokuConstants.BOARD_LENGTH) {

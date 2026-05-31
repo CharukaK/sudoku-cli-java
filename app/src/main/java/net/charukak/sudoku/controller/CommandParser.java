@@ -5,7 +5,6 @@ import net.charukak.sudoku.model.Position;
 
 public class CommandParser {
     public Command parse(String cmd) {
-        System.out.println(cmd);
         if (cmd == null || cmd.isBlank()) {
             return Command.invalid("Empty command.");
         }
@@ -20,7 +19,6 @@ public class CommandParser {
             default: {
                 String[] parts = cmd.trim().split("\s+");
 
-                System.out.println(parts.length);
                 if (parts.length != 2) {
                     return Command.invalid("Invalid command format");
                 }

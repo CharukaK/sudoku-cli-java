@@ -25,7 +25,6 @@ public class Position {
         if (ref.charAt(0) < 'a' || ref.charAt(0) > 'z' || ref.charAt(1) < '1' || ref.charAt(1) > '9') {
             throw new SudokuError("Malformed input position");
         }
-        System.out.println("no issue here");
 
         int row = ref.charAt(0) - 'a' + 1;
         int col = ref.charAt(1) - '1' + 1;
