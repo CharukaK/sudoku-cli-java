@@ -15,7 +15,6 @@ public class SudokuGame {
     }
 
     public CommandResult apply(Command cmd) {
-        // TODO: logic to mutate puzzle Board
         if (cmd == null) {
             return CommandResult.invalid("Empty command.");
         }
@@ -72,9 +71,17 @@ public class SudokuGame {
         return CommandResult.ok("Move accepted.");
     }
 
-    private CommandResult handleHint() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleHint'");
+    private CommandResult handleHint() throws SudokuError {
+        Position hintPosition = getHintTarget();
+
+        if (hintPosition == null) {
+            return CommandResult.ok("No hint available");
+        }
+
+        int value = solutionBoard.getValue(hintPosition.row(), hintPosition.col());
+
+        return CommandResult.ok(String.format("Hint: Cell %s = %d", hintPosition.toString(), value));
+
     }
 
     private CommandResult handleCheck() throws SudokuError {
@@ -93,5 +100,18 @@ public class SudokuGame {
         }
 
         return true;
+    }
+
+    private Position getHintTarget() throws SudokuError {
+        for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
+            for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
+                if (!puzzleBoard.isPreFilled(row, col)
+                        && puzzleBoard.getValue(row, col) != solutionBoard.getValue(row, col)) {
+                    return Position.fromCoordinates(row, col);
+                }
+            }
+        }
+
+        return null;
     }
 }
