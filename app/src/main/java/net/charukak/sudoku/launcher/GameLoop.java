@@ -32,6 +32,7 @@ public class GameLoop {
             if (cmd.getType() == Command.Type.QUIT) {
                 break;
             } else {
+                System.out.println("test");
                 sudokuGame.apply(cmd);
             }
         }
