@@ -28,7 +28,7 @@ public class GameLoop {
 
             System.out.print("\nEnter new command: ");
             String cmdStr = scanner.nextLine();
-            cmd = parser.parse(cmdStr);
+            cmd = parser.parse(cmdStr.toLowerCase());
 
             if (cmd.getType() == Command.Type.QUIT) {
                 break;

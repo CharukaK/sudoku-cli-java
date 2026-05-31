@@ -18,8 +18,9 @@ public class CommandParser {
             case "quit":
                 return Command.quite();
             default: {
-                String[] parts = cmd.trim().split(" ");
+                String[] parts = cmd.trim().split("\s+");
 
+                System.out.println(parts.length);
                 if (parts.length != 2) {
                     return Command.invalid("Invalid command format");
                 }
