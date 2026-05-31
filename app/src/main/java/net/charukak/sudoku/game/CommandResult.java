@@ -5,6 +5,7 @@ public class CommandResult {
         OK,
         INVALID,
         GAME_WON,
+        VIOLATION,
         QUIT
     }
 
@@ -30,6 +31,10 @@ public class CommandResult {
 
     public static CommandResult quit() {
         return new CommandResult(Status.QUIT, "Good bye!");
+    }
+
+    public static CommandResult violation(String message) {
+        return new CommandResult(Status.VIOLATION, message);
     }
 
     public Status getStatus() {

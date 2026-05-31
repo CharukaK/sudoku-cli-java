@@ -3,6 +3,7 @@ package net.charukak.sudoku.game;
 import net.charukak.sudoku.model.Board;
 import net.charukak.sudoku.model.Position;
 import net.charukak.sudoku.model.SudokuError;
+import net.charukak.sudoku.utils.SudokuConstants;
 
 public class SudokuGame {
     private Board puzzleBoard;
@@ -34,9 +35,8 @@ public class SudokuGame {
         }
     }
 
-    public boolean isComplete() {
-        // TODO: Check if complete and is valid
-        return false;
+    public boolean isComplete() throws SudokuError {
+        return this.puzzleBoard.isFilled() && areBoardsSimilar();
     }
 
     public String getBoardString() {
@@ -77,8 +77,21 @@ public class SudokuGame {
         throw new UnsupportedOperationException("Unimplemented method 'handleHint'");
     }
 
-    private CommandResult handleCheck() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handleCheck'");
+    private CommandResult handleCheck() throws SudokuError {
+        SudokuValidationResult svr = new SudokuValidator().validateBoard(puzzleBoard);
+        return svr.isValid() ? CommandResult.ok("No rule violations detected.")
+                : CommandResult.violation(svr.getMessage());
+    }
+
+    private boolean areBoardsSimilar() throws SudokuError {
+        for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
+            for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
+                if (puzzleBoard.getValue(row, col) != solutionBoard.getValue(row, col)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
