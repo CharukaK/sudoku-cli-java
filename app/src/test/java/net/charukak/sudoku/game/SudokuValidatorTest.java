@@ -1,6 +1,7 @@
 package net.charukak.sudoku.game;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
@@ -50,11 +51,12 @@ public class SudokuValidatorTest {
     @DisplayName("Detects duplicate value in a row")
     void testDuplicateInRow() throws SudokuError {
         Board board = new Board();
-        board.setValue(0, 0, 5);
-        board.setValue(0, 1, 5);
+        board.setValue(0, 0, 3);
+        board.setValue(0, 2, 3);
         SudokuValidator validator = new SudokuValidator();
         SudokuValidationResult result = validator.validateBoard(board);
         assertFalse(result.isValid());
+        assertEquals("Number 3 already exists in Row A.", result.getMessage());
     }
 
     @Test
@@ -62,21 +64,23 @@ public class SudokuValidatorTest {
     void testDuplicateInColumn() throws SudokuError {
         Board board = new Board();
         board.setValue(0, 0, 5);
-        board.setValue(1, 0, 5);
+        board.setValue(3, 0, 5);
         SudokuValidator validator = new SudokuValidator();
         SudokuValidationResult result = validator.validateBoard(board);
         assertFalse(result.isValid());
+        assertEquals("Number 5 already exists in Column 1.", result.getMessage());
     }
 
     @Test
     @DisplayName("Detects duplicate value in a box")
     void testDuplicateInBox() throws SudokuError {
         Board board = new Board();
-        board.setValue(0, 0, 5);
-        board.setValue(1, 1, 5);
+        board.setValue(3, 3, 8);
+        board.setValue(4, 4, 8);
         SudokuValidator validator = new SudokuValidator();
         SudokuValidationResult result = validator.validateBoard(board);
         assertFalse(result.isValid());
+        assertEquals("Number 8 already exists in the same 3×3 subgrid.", result.getMessage());
     }
 
 }

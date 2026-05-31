@@ -19,7 +19,6 @@ public class SudokuGame {
             return CommandResult.invalid("Empty command.");
         }
 
-        System.out.println(cmd.getType());
         try {
             return switch (cmd.getType()) {
                 case INVALID -> CommandResult.invalid(cmd.getErrorMessage());
@@ -46,8 +45,12 @@ public class SudokuGame {
         Position p = cmd.getPosition();
         int value = cmd.getValue();
 
+        if (value < 1 || value > SudokuConstants.BOARD_LENGTH) {
+            return CommandResult.invalid("Invalid number. Value must be between 1 and 9.");
+        }
+
         if (this.puzzleBoard.isPreFilled(p.row(), p.col())) {
-            return CommandResult.invalid(String.format("%s is prefilled.", p.toString()));
+            return CommandResult.invalid(String.format("Invalid move. %s is pre-filled.", p.toString().toUpperCase()));
         }
 
         this.puzzleBoard.setValue(p.row(), p.col(), value);
@@ -63,7 +66,7 @@ public class SudokuGame {
         Position p = cmd.getPosition();
 
         if (this.puzzleBoard.isPreFilled(p.row(), p.col())) {
-            return CommandResult.invalid(String.format("%s is prefilled.", p.toString()));
+            return CommandResult.invalid(String.format("Invalid move. %s is pre-filled.", p.toString().toUpperCase()));
         }
 
         this.puzzleBoard.setValue(p.row(), p.col(), 0);

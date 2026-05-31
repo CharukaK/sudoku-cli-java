@@ -7,6 +7,7 @@ import net.charukak.sudoku.game.PuzzleProvider;
 import net.charukak.sudoku.game.StaticPuzzleProvider;
 import net.charukak.sudoku.game.SudokuGame;
 import net.charukak.sudoku.game.Command;
+import net.charukak.sudoku.game.CommandResult;
 
 public class GameLoop {
     void Run() {
@@ -25,15 +26,18 @@ public class GameLoop {
             }
             System.out.println(sudokuGame.getBoardString());
 
-            System.out.print("\nEnter new command: ");
+            System.out.print("\nEnter command (e.g., A3 4, C5 clear, hint, check): ");
             String cmdStr = scanner.nextLine();
             Command cmd = parser.parse(cmdStr.toLowerCase());
+            CommandResult result = sudokuGame.apply(cmd);
 
-            if (cmd.getType() == Command.Type.QUIT) {
+            if (result.getMessage() != null && !result.getMessage().isBlank()) {
+                System.out.println("\n" + result.getMessage());
+            }
+
+            if (result.getStatus() == CommandResult.Status.QUIT
+                    || result.getStatus() == CommandResult.Status.GAME_WON) {
                 break;
-            } else {
-                System.out.println("test");
-                sudokuGame.apply(cmd);
             }
         }
 
