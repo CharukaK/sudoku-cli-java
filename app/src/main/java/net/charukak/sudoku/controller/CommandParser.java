@@ -1,7 +1,7 @@
 package net.charukak.sudoku.controller;
 
-import net.charukak.sudoku.model.Command;
-import net.charukak.sudoku.model.Position;
+import net.charukak.sudoku.game.Command;
+import net.charukak.sudoku.ui.Position;
 
 public class CommandParser {
     public Command parse(String cmd) {

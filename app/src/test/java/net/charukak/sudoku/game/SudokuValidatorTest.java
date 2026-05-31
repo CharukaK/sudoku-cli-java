@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import net.charukak.sudoku.model.Board;
-import net.charukak.sudoku.model.SudokuError;
+import net.charukak.sudoku.ui.Board;
+import net.charukak.sudoku.ui.SudokuError;
 
 @DisplayName("Sudoku Validator")
 public class SudokuValidatorTest {

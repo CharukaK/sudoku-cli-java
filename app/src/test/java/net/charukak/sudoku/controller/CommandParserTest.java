@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import net.charukak.sudoku.model.Command;
+import net.charukak.sudoku.game.Command;
 
 @DisplayName("CommandParser")
 public class CommandParserTest {

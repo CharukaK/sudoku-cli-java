@@ -1,8 +1,6 @@
 package net.charukak.sudoku.game;
 
-import net.charukak.sudoku.model.Board;
-import net.charukak.sudoku.model.Command;
-import net.charukak.sudoku.model.SudokuError;
+import net.charukak.sudoku.ui.Board;
 
 public class SudokuGame {
     private Board puzzleBoard;
@@ -16,13 +14,6 @@ public class SudokuGame {
     public void apply(Command cmd) {
         // TODO: logic to mutate puzzle Board
         System.out.println(cmd.getType());
-        SudokuValidator validator = new SudokuValidator();
-        try {
-            validator.validateBoard(this.puzzleBoard);
-        } catch (SudokuError e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         
     }
 

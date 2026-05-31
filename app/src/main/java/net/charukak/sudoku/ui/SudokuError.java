@@ -1,4 +1,4 @@
-package net.charukak.sudoku.model;
+package net.charukak.sudoku.ui;
 
 public class SudokuError extends Exception {
     public SudokuError(String message) {

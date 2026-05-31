@@ -1,6 +1,6 @@
 package net.charukak.sudoku.game;
 
-import net.charukak.sudoku.model.Board;
+import net.charukak.sudoku.ui.Board;
 
 public interface PuzzleProvider {
     Board getPuzzleBoard();

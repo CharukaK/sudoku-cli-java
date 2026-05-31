@@ -1,4 +1,4 @@
-package net.charukak.sudoku.model;
+package net.charukak.sudoku.ui;
 
 public class Position {
     private final int row;

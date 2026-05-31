@@ -3,9 +3,9 @@ package net.charukak.sudoku.game;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.charukak.sudoku.model.Board;
-import net.charukak.sudoku.model.Position;
-import net.charukak.sudoku.model.SudokuError;
+import net.charukak.sudoku.ui.Board;
+import net.charukak.sudoku.ui.Position;
+import net.charukak.sudoku.ui.SudokuError;
 import net.charukak.sudoku.utils.SudokuConstants;
 
 public class SudokuValidator {

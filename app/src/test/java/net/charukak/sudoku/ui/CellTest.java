@@ -1,4 +1,4 @@
-package net.charukak.sudoku.model;
+package net.charukak.sudoku.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

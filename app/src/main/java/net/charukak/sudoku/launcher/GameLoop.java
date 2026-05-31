@@ -6,7 +6,7 @@ import net.charukak.sudoku.controller.CommandParser;
 import net.charukak.sudoku.game.PuzzleProvider;
 import net.charukak.sudoku.game.StaticPuzzleProvider;
 import net.charukak.sudoku.game.SudokuGame;
-import net.charukak.sudoku.model.Command;
+import net.charukak.sudoku.game.Command;
 
 public class GameLoop {
     void Run() {
