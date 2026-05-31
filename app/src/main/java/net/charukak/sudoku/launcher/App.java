@@ -3,17 +3,10 @@
  */
 package net.charukak.sudoku.launcher;
 
-import java.io.Console;
-
-import net.charukak.sudoku.model.Board;
-
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        Board b = new Board();
-        System.out.println(b.getPrintableString());
+        GameLoop gl = new GameLoop();
+        gl.Run();
     }
 }
