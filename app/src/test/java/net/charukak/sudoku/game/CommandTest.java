@@ -1,9 +1,9 @@
-package net.charukak.sudoku.model;
+package net.charukak.sudoku.game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import net.charukak.sudoku.game.Command;
+import net.charukak.sudoku.model.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
