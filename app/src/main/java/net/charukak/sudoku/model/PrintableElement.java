@@ -1,4 +1,4 @@
-package net.charukak.sudoku.ui;
+package net.charukak.sudoku.model;
 
 interface PrintableElement {
     public String getPrintableString();

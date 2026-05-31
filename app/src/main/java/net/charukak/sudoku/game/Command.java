@@ -1,6 +1,6 @@
 package net.charukak.sudoku.game;
 
-import net.charukak.sudoku.ui.Position;
+import net.charukak.sudoku.model.Position;
 
 public class Command {
     public static enum Type {

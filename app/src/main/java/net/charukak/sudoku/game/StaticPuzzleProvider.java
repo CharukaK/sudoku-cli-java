@@ -1,7 +1,7 @@
 package net.charukak.sudoku.game;
 
-import net.charukak.sudoku.ui.Board;
-import net.charukak.sudoku.ui.SudokuError;
+import net.charukak.sudoku.model.Board;
+import net.charukak.sudoku.model.SudokuError;
 
 public class StaticPuzzleProvider implements PuzzleProvider {
 

@@ -1,6 +1,6 @@
 package net.charukak.sudoku.game;
 
-import net.charukak.sudoku.ui.Board;
+import net.charukak.sudoku.model.Board;
 
 public class SudokuGame {
     private Board puzzleBoard;
