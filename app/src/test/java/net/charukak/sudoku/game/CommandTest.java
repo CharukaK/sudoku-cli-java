@@ -3,9 +3,15 @@ package net.charukak.sudoku.game;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+
 import net.charukak.sudoku.model.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 @DisplayName("Command")
 public class CommandTest {
@@ -32,34 +38,20 @@ public class CommandTest {
         assertNull(cmd.getErrorMessage());
     }
 
-    @Test
-    @DisplayName("hint returns HINT with null fields")
-    void testHint() {
-        Command cmd = Command.hint();
-        assertEquals(Command.Type.HINT, cmd.getType());
-        assertNull(cmd.getPosition());
-        assertNull(cmd.getValue());
-        assertNull(cmd.getErrorMessage());
+    @ParameterizedTest
+    @DisplayName("no-arg factories return command with null payload")
+    @MethodSource("noArgCommandProvider")
+    void testNoArgFactories(Command.Type expectedType, Supplier<Command> factory) {
+        Command cmd = factory.get();
+        assertEquals(expectedType, cmd.getType());
+        assertNoPayload(cmd);
     }
 
-    @Test
-    @DisplayName("check returns CHECK with null fields")
-    void testCheck() {
-        Command cmd = Command.check();
-        assertEquals(Command.Type.CHECK, cmd.getType());
-        assertNull(cmd.getPosition());
-        assertNull(cmd.getValue());
-        assertNull(cmd.getErrorMessage());
-    }
-
-    @Test
-    @DisplayName("quite returns QUIT with null fields")
-    void testQuite() {
-        Command cmd = Command.quite();
-        assertEquals(Command.Type.QUIT, cmd.getType());
-        assertNull(cmd.getPosition());
-        assertNull(cmd.getValue());
-        assertNull(cmd.getErrorMessage());
+    static Stream<Arguments> noArgCommandProvider() {
+        return Stream.of(
+                Arguments.of(Command.Type.HINT, (Supplier<Command>) Command::hint),
+                Arguments.of(Command.Type.CHECK, (Supplier<Command>) Command::check),
+                Arguments.of(Command.Type.QUIT, (Supplier<Command>) Command::quite));
     }
 
     @Test
@@ -70,5 +62,11 @@ public class CommandTest {
         assertEquals("bad input", cmd.getErrorMessage());
         assertNull(cmd.getPosition());
         assertNull(cmd.getValue());
+    }
+
+    private void assertNoPayload(Command cmd) {
+        assertNull(cmd.getPosition());
+        assertNull(cmd.getValue());
+        assertNull(cmd.getErrorMessage());
     }
 }

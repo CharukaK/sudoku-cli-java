@@ -31,24 +31,23 @@ public class CommandParserTest {
     }
 
     @ParameterizedTest
-    @DisplayName("returns HINT for hint command")
-    @ValueSource(strings = { "hint", "HINT", "Hint" })
-    void testHint(String input) {
-        assertEquals(Command.Type.HINT, parser.parse(input).getType());
+    @DisplayName("returns expected type for known single-word commands")
+    @MethodSource("singleWordCommandProvider")
+    void testKnownSingleWordCommands(String input, Command.Type expectedType) {
+        assertEquals(expectedType, parser.parse(input).getType());
     }
 
-    @ParameterizedTest
-    @DisplayName("returns CHECK for check command")
-    @ValueSource(strings = { "check", "CHECK", "Check" })
-    void testCheck(String input) {
-        assertEquals(Command.Type.CHECK, parser.parse(input).getType());
-    }
-
-    @ParameterizedTest
-    @DisplayName("returns QUIT for quit command")
-    @ValueSource(strings = { "quit", "QUIT", "Quit" })
-    void testQuit(String input) {
-        assertEquals(Command.Type.QUIT, parser.parse(input).getType());
+    static Stream<Arguments> singleWordCommandProvider() {
+        return Stream.of(
+                Arguments.of("hint", Command.Type.HINT),
+                Arguments.of("HINT", Command.Type.HINT),
+                Arguments.of("Hint", Command.Type.HINT),
+                Arguments.of("check", Command.Type.CHECK),
+                Arguments.of("CHECK", Command.Type.CHECK),
+                Arguments.of("Check", Command.Type.CHECK),
+                Arguments.of("quit", Command.Type.QUIT),
+                Arguments.of("QUIT", Command.Type.QUIT),
+                Arguments.of("Quit", Command.Type.QUIT));
     }
 
     @ParameterizedTest
@@ -87,18 +86,10 @@ public class CommandParserTest {
     }
 
     @ParameterizedTest
-    @DisplayName("returns invalid for unknown single-word command")
-    @ValueSource(strings = { "foo", "unknown", "x" })
-    void testUnknownSingleWord(String input) {
+    @DisplayName("returns invalid for malformed command format")
+    @ValueSource(strings = { "foo", "unknown", "x", "a1 5 extra" })
+    void testInvalidFormat(String input) {
         Command cmd = parser.parse(input);
-        assertEquals(Command.Type.INVALID, cmd.getType());
-        assertEquals("Invalid command format", cmd.getErrorMessage());
-    }
-
-    @Test
-    @DisplayName("returns invalid for too many parts")
-    void testTooManyParts() {
-        Command cmd = parser.parse("a1 5 extra");
         assertEquals(Command.Type.INVALID, cmd.getType());
         assertEquals("Invalid command format", cmd.getErrorMessage());
     }
