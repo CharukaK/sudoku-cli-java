@@ -29,6 +29,20 @@ java -jar app/build/libs/app.jar
 You will be prompted with the game as follows
 ![game_greet](./docs/game_greeting.png)
 
+## Supported Commands
+
+The following commands are available once the game has started:
+
+| Command | Syntax | Description |
+|---------|--------|-------------|
+| Set value | `<ref> <1-9>` (e.g., `A3 4`) | Enter a value into a cell |
+| Clear | `<ref> clear` (e.g., `A3 clear`) | Clear a cell's value |
+| Hint | `hint` | Reveal the correct value for the next incorrect or empty cell |
+| Check | `check` | Validate the board for rule violations |
+| Quit | `quit` | Exit the game |
+
+Cell references use standard Sudoku notation: a letter `A`–`I` for the row and a digit `1`–`9` for the column (e.g., `A1`, `C3`, `H8`).
+
 ## Design & Assumptions
 
 The app is split into four packages:
