@@ -107,6 +107,6 @@ public class CommandParserTest {
     void testNonNumericValue() {
         Command cmd = parser.parse("a1 abc");
         assertEquals(Command.Type.INVALID, cmd.getType());
-        assertTrue(cmd.getErrorMessage().contains("abc"));
+        assertEquals("Invalid number. Value must be between 1 and 9.", cmd.getErrorMessage());
     }
 }

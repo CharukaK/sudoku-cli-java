@@ -113,7 +113,7 @@ class SudokuCliE2ETest {
                 Arguments.of("   ", "Empty command.", false),
                 Arguments.of("foo", "Invalid command format", false),
                 Arguments.of("a1 5 extra", "Invalid command format", false),
-                Arguments.of("a1 abc", "For input string: \"abc\"", true),
+                Arguments.of("a1 abc", "Invalid number. Value must be between 1 and 9.", false),
                 Arguments.of("j1 4", "Malformed input position", false),
                 Arguments.of("aa 4", "Malformed input position", false));
     }
