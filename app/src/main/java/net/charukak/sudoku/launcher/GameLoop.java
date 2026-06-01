@@ -3,15 +3,14 @@ package net.charukak.sudoku.launcher;
 import java.util.Scanner;
 
 import net.charukak.sudoku.controller.CommandParser;
-import net.charukak.sudoku.game.PuzzleProvider;
-import net.charukak.sudoku.game.StaticPuzzleProvider;
-import net.charukak.sudoku.game.SudokuGame;
 import net.charukak.sudoku.game.Command;
 import net.charukak.sudoku.game.CommandResult;
 import net.charukak.sudoku.game.DynamicPuzzleProvider;
+import net.charukak.sudoku.game.PuzzleProvider;
+import net.charukak.sudoku.game.SudokuGame;
 
 public class GameLoop {
-    void Run() {
+    void run() {
         boolean showGreeting = true;
         Scanner scanner = new Scanner(System.in);
         CommandParser parser = new CommandParser();
