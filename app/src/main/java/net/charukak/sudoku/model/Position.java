@@ -1,5 +1,7 @@
 package net.charukak.sudoku.model;
 
+import net.charukak.sudoku.utils.SudokuConstants;
+
 public class Position {
     private final int row;
     private final int col;
@@ -34,7 +36,8 @@ public class Position {
             throw new SudokuError("Invalid position reference provided");
         }
 
-        if (ref.charAt(0) < 'a' || ref.charAt(0) > 'z' || ref.charAt(1) < '1' || ref.charAt(1) > '9') {
+        if (ref.charAt(0) < 'a' || ref.charAt(0) > 'a' + SudokuConstants.BOARD_LENGTH - 1 || ref.charAt(1) < '1'
+                || ref.charAt(1) > '9') {
             throw new SudokuError("Malformed input position");
         }
 

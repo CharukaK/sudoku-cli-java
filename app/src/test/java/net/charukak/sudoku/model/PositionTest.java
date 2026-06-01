@@ -52,8 +52,8 @@ public class PositionTest {
     }
 
     @ParameterizedTest
-    @DisplayName("throws for malformed first character (not A-Z)")
-        @ValueSource(strings = { "11", "@1", "[1", "1a" })
+    @DisplayName("throws for malformed first character (not A-I)")
+    @ValueSource(strings = { "11", "@1", "[1", "1a", "j1" })
     void testInvalidFirstChar(String ref) {
         assertThrows(SudokuError.class, () -> Position.fromRef(ref));
     }
@@ -64,4 +64,5 @@ public class PositionTest {
     void testInvalidSecondChar(String ref) {
         assertThrows(SudokuError.class, () -> Position.fromRef(ref));
     }
+
 }
