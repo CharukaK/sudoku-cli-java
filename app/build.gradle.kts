@@ -46,6 +46,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.named<JavaExec>("run") { // because game expects input from std in game crashes
+    enabled = false
+}
+
 tasks.register<org.gradle.jvm.tasks.Jar>("fatJar") {
     archiveClassifier.set("all")
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
