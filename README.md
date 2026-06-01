@@ -53,5 +53,15 @@ every session using backtracking seeded with diagonal 3×3 blocks
 - The terminal supports ANSI escape codes (Linux and macOS tested; Windows not guaranteed)
 - Single-user, single-threaded CLI with no save/load
 
-> Note: Game is tested only on linux and macos, the ANSI escape codes are not
-> properly tested in windows terminal
+### Board generation flow
+
+```mermaid
+flowchart TD
+    G[GameLoop startup] --> P[DynamicPuzzleProvider]
+    P --> PG[PuzzleGenerator]
+    PG --> S1[Seed 3 diagonal 3×3 boxes\nwith random 1-9 permutations]
+    S1 --> S2[Backtrack fill remaining cells\nto produce a valid solution]
+    S2 --> S3[Clone solved board as reference]
+    S3 --> S4[Remove cells until 30 clues remain,\nverifying unique solution each time]
+    S4 --> S5[Return puzzle Board + solution Board]
+```
