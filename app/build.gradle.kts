@@ -46,8 +46,8 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.named<JavaExec>("run") { // because game expects input from std in game crashes
-    enabled = false
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
 }
 
 tasks.register<org.gradle.jvm.tasks.Jar>("fatJar") {
