@@ -39,7 +39,7 @@ public class Command {
         return new Command(Type.CHECK, null, null, null);
     }
 
-    public static Command quite() {
+    public static Command quit() {
         return new Command(Type.QUIT, null, null, null);
     }
 

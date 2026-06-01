@@ -15,7 +15,7 @@ public class CommandParser {
             case "check":
                 return Command.check();
             case "quit":
-                return Command.quite();
+                return Command.quit();
             default: {
                 String[] parts = cmd.trim().split("\s+");
 

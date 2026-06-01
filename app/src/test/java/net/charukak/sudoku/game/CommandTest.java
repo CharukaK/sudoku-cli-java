@@ -51,7 +51,7 @@ public class CommandTest {
         return Stream.of(
                 Arguments.of(Command.Type.HINT, (Supplier<Command>) Command::hint),
                 Arguments.of(Command.Type.CHECK, (Supplier<Command>) Command::check),
-                Arguments.of(Command.Type.QUIT, (Supplier<Command>) Command::quite));
+                Arguments.of(Command.Type.QUIT, (Supplier<Command>) Command::quit));
     }
 
     @Test
