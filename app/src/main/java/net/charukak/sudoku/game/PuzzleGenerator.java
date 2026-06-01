@@ -1,6 +1,8 @@
 package net.charukak.sudoku.game;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -11,13 +13,14 @@ public class PuzzleGenerator {
     private int[][] puzzle = new int[SudokuConstants.BOARD_LENGTH][SudokuConstants.BOARD_LENGTH];
 
     public int[][] generateSolutionBoard() {
-        preSeedBoardForPuzzleGen(solution);
-        genSolutionBoard(solution);
+        preSeedBoardForPuzzleGen(this.solution);
+        genSolutionBoard(this.solution);
         return solution;
     }
 
     public int[][] generatePuzzleBoardFromSolution() {
-        puzzle = solution;
+        this.puzzle = deepCopyBoard(this.solution);
+        genPuzzleBoard(this.puzzle);
         return puzzle;
     }
 
@@ -41,6 +44,62 @@ public class PuzzleGenerator {
                 }
             }
         }
+    }
+
+    private boolean genPuzzleBoard(int[][] board) {
+        List<int[]> positions = new ArrayList<>();
+        Random random = new Random();
+
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++) {
+                positions.add(new int[] { row, col });
+            }
+        }
+
+        int targetClues = SudokuConstants.TOTAL_CLUES;
+        int currentClues = board.length * board.length;
+
+        while (currentClues > targetClues && !positions.isEmpty()) {
+            int positionIndex = random.nextInt(positions.size());
+            int[] position = positions.remove(positionIndex);
+
+            int row = position[0];
+            int col = position[1];
+
+            int currentValue = board[row][col];
+            board[row][col] = 0;
+
+            if (countSolutions(board, 2) == 1) {
+                currentClues--;
+            } else {
+                board[row][col] = currentValue;
+            }
+
+        }
+
+        return true;
+    }
+
+    private int countSolutions(int[][] board, int limit) {
+        // find first empty cell
+        for (int row = 0; row < SudokuConstants.BOARD_LENGTH; row++) {
+            for (int col = 0; col < SudokuConstants.BOARD_LENGTH; col++) {
+                if (board[row][col] == 0) {
+                    int total = 0;
+                    for (int num = 1; num <= SudokuConstants.BOARD_LENGTH; num++) {
+                        if (canInsertValue(board, row, col, num)) {
+                            board[row][col] = num;
+                            total += countSolutions(board, limit - total);
+                            board[row][col] = 0;
+                            if (total >= limit)
+                                return total;
+                        }
+                    }
+                    return total;
+                }
+            }
+        }
+        return 1; // no empty cells → found a complete solution
     }
 
     private boolean genSolutionBoard(int[][] board) {
@@ -91,6 +150,16 @@ public class PuzzleGenerator {
         }
 
         return true;
+    }
+
+    private int[][] deepCopyBoard(int[][] b) {
+        int[][] copy = new int[b.length][b.length];
+
+        for (int row = 0; row < b.length; row++) {
+            copy[row] = b[row].clone();
+        }
+
+        return copy;
     }
 
 }

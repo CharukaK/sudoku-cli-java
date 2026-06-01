@@ -8,13 +8,14 @@ import net.charukak.sudoku.game.StaticPuzzleProvider;
 import net.charukak.sudoku.game.SudokuGame;
 import net.charukak.sudoku.game.Command;
 import net.charukak.sudoku.game.CommandResult;
+import net.charukak.sudoku.game.DynamicPuzzleProvider;
 
 public class GameLoop {
     void Run() {
         boolean showGreeting = true;
         Scanner scanner = new Scanner(System.in);
         CommandParser parser = new CommandParser();
-        PuzzleProvider provider = new StaticPuzzleProvider();
+        PuzzleProvider provider = new DynamicPuzzleProvider();
         SudokuGame sudokuGame = new SudokuGame(provider.getPuzzleBoard(), provider.getSolutionBoard());
         String message = null;
 
