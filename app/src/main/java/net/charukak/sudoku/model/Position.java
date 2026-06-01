@@ -32,7 +32,7 @@ public class Position {
     }
 
     public static Position fromRef(String ref) throws SudokuError {
-        if (ref.length() == 0 || ref.length() > 2) {
+        if (ref.length() != 2) {
             throw new SudokuError("Invalid position reference provided");
         }
 
